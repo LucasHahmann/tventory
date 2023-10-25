@@ -1,24 +1,28 @@
-# device-database
+# Welcome Tventory!
 
-## Project setup
-```
-npm install
-```
+Tventory is to become an asset management for IT devices.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# Techstack
 
-### Compiles and minifies for production
-```
-npm run build
-```
+-    _VueJS 3_ for frontend
+-    _NestJS_ for Backend
+-    _PrismaJS_ for database connections
 
-### Lints and fixes files
-```
-npm run lint
-```
+# What to do?
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## User
+
+-    [ ] Create User
+-    [ ] Edit User
+-    [ ] Remove User
+
+## Assets
+
+-    [ ] Create Asset
+-    [ ] Edit Asset
+-    [ ] Remove Asset
+
+## Types
+
+-    [ ] Create Type
+-    [ ] Remove Type
