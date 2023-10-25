@@ -1,19 +1,18 @@
 <template>
-     <v-app>
-          <v-main>
-               <v-app>
-                    <router-view />
-               </v-app>
-          </v-main>
-     </v-app>
+     <div>
+          <AppBar />
+     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import AppBar from "../components/AppBar.vue";
 
 export default defineComponent({
-     name: "App",
-
+     name: "DashboardView",
+     components: {
+          AppBar,
+     },
      data() {
           return {};
      },
