@@ -7,9 +7,44 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRES_STRING")
 }
 
-model Devices {
-  uuid String @id @default(uuid())
+model Asset {
+  id Int @id @default(autoincrement())
+  // 1:N
+  Employee Employee @relation(fields: [EmployeeID], references: [id])
+  EmployeeID Int
+}
+
+
+
+model Employee {
+  id Int @id @default(autoincrement())
+  FirstName String
+  LastName String
+  Fullname String
+  EMail String @unique
+  CreatedAt DateTime @default(now())
+  UpdatetAt DateTime @updatedAt
+  // 1:N
+  Building Building @relation(fields: [BuildingName], references: [Name])
+  BuildingName String
+  // 1:N
+  Assets Asset[]
+}
+
+model Building{
+  id Int @id @default(autoincrement())
+  Name String @unique
+  Employees Employee[]
+}
+
+enum AssetType {
+  Computer
+  Laptop
+  Mobile
+  Networking
+  Printer
+  Scanner
 }
