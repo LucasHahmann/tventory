@@ -1,33 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAssetDto } from './dto/create-asset.dto';
-import { UpdateAssetDto } from './dto/update-asset.dto';
+import { CreateModelDto } from './dto/create-model.dto';
+import { UpdateModelDto } from './dto/update-model.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClient, Prisma } from '@prisma/client';
 
 @Injectable()
-export class AssetService {
+export class ModelService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createAssetDto: CreateAssetDto, res) {
-    console.log(createAssetDto);
+  async create(createModelDto: CreateModelDto, res) {
     try {
-      const newAsset = await this.prisma.asset.create({
+      const newModel = await this.prisma.model.create({
         data: {
-          Employee: {
+          Model: createModelDto.Model,
+          Manufactor: {
             connect: {
-              id: createAssetDto.Employee,
+              Name: createModelDto.Manufactor,
             },
           },
-          Model: {
+          AssetType: {
             connect: {
-              Model: createAssetDto.ModelName,
+              Type: createModelDto.AssetType,
             },
           },
         },
       });
       return res.status(200).json({
-        message: 'Successfully created Asset',
-        data: newAsset,
+        message: 'Successfully created model',
+        data: newModel,
       });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -35,7 +35,7 @@ export class AssetService {
         // Handle specific known request error
         if (error.code === 'P2002')
           return res.status(400).json({
-            error: 'Type already exists',
+            error: 'Manfucator already exists',
             prismaCode: error.code,
           });
         return res.status(400).json({ prismaCode: error.code });
@@ -53,11 +53,11 @@ export class AssetService {
 
   async findAll(res) {
     try {
-      const assets = await this.prisma.asset.findMany();
+      const models = await this.prisma.model.findMany();
 
       return res
         .status(200)
-        .json({ message: 'Succesfully queried assets', data: assets });
+        .json({ message: 'Succesfully queried models', data: models });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle specific known request error
@@ -74,16 +74,16 @@ export class AssetService {
 
   async findOne(id: number, res) {
     try {
-      const asset = await this.prisma.asset.findUnique({
+      const model = await this.prisma.model.findUnique({
         where: { id: id },
       });
-      if (asset === null)
+      if (model === null)
         return res
           .status(400)
-          .json({ message: 'No asset was found!', data: asset });
+          .json({ message: 'No model was found!', data: model });
       return res
         .status(200)
-        .json({ message: 'Succesfully queried asset', data: asset });
+        .json({ message: 'Succesfully queried model', data: model });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle specific known request error
@@ -98,18 +98,37 @@ export class AssetService {
     }
   }
 
-  update(id: number, updateAssetDto: UpdateAssetDto, res) {
-    return `This action updates a #${id} asset`;
+  async update(id: number, updateModelDto: UpdateModelDto, res) {
+    try {
+      const assetType = await this.prisma.assetType.update({
+        where: { id: id },
+        data: {},
+      });
+      return res
+        .status(200)
+        .json({ message: 'Succesfully updatet model', data: assetType });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        // Handle specific known request error
+        return res.status(400).json({ prismaCode: error.code });
+      } else if (error instanceof Prisma.PrismaClientUnknownRequestError) {
+        // Handle unknown request error
+        return res.status(500).json(error);
+      } else {
+        // Handle other errors
+        return res.status(500).json({ message: 'Unknwon Reason' });
+      }
+    }
   }
 
   async remove(id: number, res) {
     try {
-      const asset = await this.prisma.asset.delete({
+      const model = await this.prisma.model.delete({
         where: { id: id },
       });
       return res
         .status(200)
-        .json({ message: 'Succesfully removed asset', data: asset });
+        .json({ message: 'Succesfully removed model', data: model });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle specific known request error

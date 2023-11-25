@@ -4,7 +4,7 @@
      </div>
 
      <div style="margin: 75px">
-          <h1>Create device</h1>
+          <h1>Create Asset</h1>
           <v-container>
                <v-row>
                     <v-col>
@@ -32,16 +32,16 @@
                </v-row>
                <v-row>
                     <v-col>
-                         <v-btn @click="addDevice" color="primary">
-                              Add Device
+                         <v-btn @click="addAsset" color="primary">
+                              Add Asset
                          </v-btn>
                     </v-col>
                </v-row>
-               <div v-for="(device, index) in devices" :key="index">
+               <div v-for="(asset, index) in assets" :key="index">
                     <v-row>
                          <v-card style="margin: 25px" width="95%">
                               <v-card-title>
-                                   Device {{ index + 1 }}
+                                   Asset {{ index + 1 }}
                               </v-card-title>
                               <v-card-text>
                                    <v-container>
@@ -78,7 +78,7 @@
                          </v-card>
                     </v-row>
                </div>
-               <v-btn color="primary"> Create devices </v-btn>
+               <v-btn color="primary"> Create asset </v-btn>
           </v-container>
      </div>
 </template>
@@ -86,9 +86,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import AppBar from "../components/AppBar.vue";
+import fatch from "../methods/fatch.js";
 
 export default defineComponent({
-     name: "CreateDeviceView",
+     name: "CreateAssetView",
      components: {
           AppBar,
      },
@@ -100,22 +101,15 @@ export default defineComponent({
                EmployeeAutoCompleteFieldItems: new Array<string>(),
                BuildingAutoCompleteFieldItems: new Array<string>(),
                room: new String(),
-               devices: new Array<object>(),
+               assets: new Array<object>(),
           };
      },
      methods: {
-          addDevice() {
-               this.devices.push({});
+          addAsset() {
+               this.assets.push({});
           },
-          initAutocompletes() {
-               this.EmployeeAutoCompleteFieldItems = [
-                    "California",
-                    "Colorado",
-                    "Florida",
-                    "Georgia",
-                    "Texas",
-                    "Wyoming",
-               ];
+          async initAutocompletes() {
+               console.log(await fatch("GetAllEmployees"));
           },
           onSubmit() {
                console.log("Hallo");

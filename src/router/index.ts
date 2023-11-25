@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import DashboardView from "../views/DashboardView.vue";
-import CreateDeviceView from "../views/CreateDeviceView.vue";
+import CreateAssetView from "../views/CreateAssetView.vue";
 
 const routes: Array<RouteRecordRaw> = [
      {
@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
      {
           path: "/create",
           name: "createDevice",
-          component: CreateDeviceView,
+          component: CreateAssetView,
      },
 ];
 

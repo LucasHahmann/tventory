@@ -12,12 +12,41 @@ datasource db {
 
 model Asset {
   id Int @id @default(autoincrement())
-  // 1:N
+  // 1 Employee N Assets
   Employee Employee @relation(fields: [EmployeeID], references: [id])
   EmployeeID Int
+  
+  // Many Assets have one Model
+  Model Model @relation(fields: [ModelName], references: [Model])
+  ModelName String
 }
 
+model Model {
+  id Int @id @default(autoincrement())
+  Model String @unique
+  // 1 Manufactor many Models
+  Manufactor Manufactor @relation(fields: [ManufactorName], references: [Name])
+  ManufactorName String
+  // N Types 1 Asset
+  AssetType AssetType @relation(fields: [AssetTypeName], references: [Type])
+  AssetTypeName String
+  // Asset
+  Assets Asset[]
+}
 
+model AssetType {
+  id Int @id @default(autoincrement())
+  Type String @unique
+
+  Models Model[]
+}
+
+model Manufactor {
+  id Int @id @default(autoincrement())
+  Name String @unique
+  Models Model[]
+
+}
 
 model Employee {
   id Int @id @default(autoincrement())
@@ -27,10 +56,10 @@ model Employee {
   EMail String @unique
   CreatedAt DateTime @default(now())
   UpdatetAt DateTime @updatedAt
-  // 1:N
+  // 1:N: 1 Building N Employee
   Building Building @relation(fields: [BuildingName], references: [Name])
   BuildingName String
-  // 1:N
+  // 
   Assets Asset[]
 }
 
@@ -38,13 +67,4 @@ model Building{
   id Int @id @default(autoincrement())
   Name String @unique
   Employees Employee[]
-}
-
-enum AssetType {
-  Computer
-  Laptop
-  Mobile
-  Networking
-  Printer
-  Scanner
 }
