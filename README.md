@@ -10,6 +10,38 @@ Tventory is a streamlined Asset Management System designed for efficient managem
 -    **Search and Filtering:** Easily locate devices using search and filter functionalities.
 -    **Reporting:** Generate insightful reports on device status, usage patterns, and more for informed decision-making.
 
+## What to do (Frontend)?
+
+### Manufactors
+
+-    [x] Create Manufactor
+-    [x] Edit Manufactor
+-    [x] Remove Manufactor
+
+### Models
+
+-    [ ] Create Model
+-    [ ] Edit Model
+-    [ ] Remove Model
+
+### Types
+
+-    [ ] Create Type
+-    [ ] Edit Type
+-    [ ] Remove Type
+
+### Employees
+
+-    [ ] Create Employee
+-    [ ] Edit Employee
+-    [ ] Remove Employee
+
+### Buildings
+
+-    [ ] Create Building
+-    [ ] Edit Building
+-    [ ] Remove Building
+
 ## Installation
 
 ### Prerequisites

@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import DashboardView from "../views/DashboardView.vue";
 import CreateAssetView from "../views/CreateAssetView.vue";
+import DeviceSettingsView from "../views/DeviceSettingsView.vue";
+import testtable from "../views/TestTable.vue";
 
 const routes: Array<RouteRecordRaw> = [
      {
@@ -12,6 +14,16 @@ const routes: Array<RouteRecordRaw> = [
           path: "/create",
           name: "createDevice",
           component: CreateAssetView,
+     },
+     {
+          path: "/devicesettings",
+          name: "devicesettings",
+          component: DeviceSettingsView,
+     },
+     {
+          path: "/testtable",
+          name: "testtable",
+          component: testtable,
      },
 ];
 

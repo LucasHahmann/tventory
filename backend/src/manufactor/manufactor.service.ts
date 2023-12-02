@@ -18,6 +18,7 @@ export class ManufactorService {
       return res.status(200).json({
         message: 'Successfully created manfucator',
         data: newManufacturer,
+        status: 200,
       });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -108,14 +109,20 @@ export class ManufactorService {
       });
       return res
         .status(200)
-        .json({ message: 'Successfully update manufactor', data: manufactor });
+        .json({
+          message: 'Successfully update manufactor',
+          data: manufactor,
+          status: 200,
+        });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle specific known request error
         if (error.code === 'P2002')
-          return res
-            .status(400)
-            .json({ error: 'Building already exists', prismaCode: error.code });
+          return res.status(400).json({
+            error: 'Manufactor already exists',
+            prismaCode: error.code,
+            status: 400,
+          });
         return res.status(400).json({ prismaCode: error.code });
       } else if (error instanceof Prisma.PrismaClientUnknownRequestError) {
         // Handle unknown request error
@@ -135,24 +142,30 @@ export class ManufactorService {
           id: id,
         },
       });
-      return res
-        .status(200)
-        .json({ message: 'Successfully deleted manufactor', data: manufactor });
+      return res.status(200).json({
+        message: 'Successfully deleted manufactor',
+        data: manufactor,
+        status: 200,
+      });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2025')
           return res.status(400).json({
-            error: 'The building could not be found!',
+            status: 400,
+            error: 'The manufactor could not be found!',
             prismaCode: error.code,
           });
         // Handle specific known request error
         if (error.code === 'P2002')
-          return res
-            .status(400)
-            .json({ error: 'Building already exists', prismaCode: error.code });
+          return res.status(400).json({
+            status: 400,
+            error: 'Manufactor already exists',
+            prismaCode: error.code,
+          });
         if (error.code === 'P2003')
           return res.status(400).json({
-            error: 'There are still employees in the building!',
+            status: 400,
+            error: 'The Manufactor ist still in use!',
             prismaCode: error.code,
           });
         return res.status(400).json({ prismaCode: error.code });
