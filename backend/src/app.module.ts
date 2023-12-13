@@ -7,6 +7,8 @@ import { AssetModule } from './asset/asset.module';
 import { ManufactorModule } from './manufactor/manufactor.module';
 import { ModelModule } from './model/model.module';
 import { AssetTypeModule } from './asset-type/asset-type.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { AssetTypeModule } from './asset-type/asset-type.module';
     ModelModule,
     AssetTypeModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -138,7 +138,7 @@
           :type="ManufactorAlertType"
           :title="ManufactorAlterTitle"
           :text="ManufactorAlertText"
-     ></v-alert>
+     />
 </template>
 
 <script>

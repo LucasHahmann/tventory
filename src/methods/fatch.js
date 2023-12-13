@@ -29,6 +29,10 @@ export default async function fatch(endpoint, variables) {
                b0dy = JSON.stringify({ Name: variables.Name });
                console.log(url, b0dy);
                break;
+          case "CheckBackendConnection":
+               url = backend + `/`;
+               fetchMethod = "GET";
+               break;
      }
      const options = {
           method: fetchMethod,
