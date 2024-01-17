@@ -5,7 +5,7 @@
                <v-btn> Dashboard </v-btn>
                <v-btn @click="route('create')"> Create Device </v-btn>
                <v-btn @click="route('devicesettings')"> Device Settings</v-btn>
-               <v-btn> Meta Settings </v-btn>
+               <v-btn @click="route('metasettings')"> Meta Settings </v-btn>
           </v-app-bar>
      </div>
 </template>

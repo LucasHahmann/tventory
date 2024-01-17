@@ -3,6 +3,7 @@ import DashboardView from "../views/DashboardView.vue";
 import CreateAssetView from "../views/CreateAssetView.vue";
 import DeviceSettingsView from "../views/DeviceSettingsView.vue";
 import testtable from "../views/TestTable.vue";
+import MetaSettingsView from "../views/MetaSettingsView.vue";
 
 const routes: Array<RouteRecordRaw> = [
      {
@@ -19,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
           path: "/devicesettings",
           name: "devicesettings",
           component: DeviceSettingsView,
+     },
+     {
+          path: "/metasettings",
+          name: "metasettings",
+          component: MetaSettingsView,
      },
      {
           path: "/testtable",

@@ -15,9 +15,11 @@ export class BuildingService {
           Name: createBuildingDto.Name,
         },
       });
-      return res
-        .status(200)
-        .json({ message: 'Successfully create building', data: building });
+      return res.status(201).json({
+        message: 'Successfully create building',
+        data: building,
+        status: '201',
+      });
     } catch (error) {
       console.log('Error');
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -103,9 +105,11 @@ export class BuildingService {
           Name: updateBuildingDto.Name,
         },
       });
-      return res
-        .status(200)
-        .json({ message: 'Successfully update building', data: building });
+      return res.status(200).json({
+        message: 'Successfully update building',
+        data: building,
+        status: 200,
+      });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle specific known request error
@@ -134,7 +138,11 @@ export class BuildingService {
       });
       return res
         .status(200)
-        .json({ message: 'Successfully deleted building', data: building });
+        .json({
+          message: 'Successfully deleted building',
+          data: building,
+          status: 200,
+        });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2025')

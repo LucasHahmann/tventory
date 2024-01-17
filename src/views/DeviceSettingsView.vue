@@ -6,6 +6,7 @@
           <div id="manufactors">
                <h1>Edit Manufactors</h1>
                <ManufactorDataTable />
+               <ModelTypeDataTable />
           </div>
      </div>
 </template>
@@ -14,12 +15,14 @@
 import { defineComponent } from "vue";
 import AppBar from "../components/AppBar.vue";
 import ManufactorDataTable from "../components/ManufactorDataTable.vue";
+import ModelTypeDataTable from "@/components/ModelTypeDataTable.vue";
 
 export default defineComponent({
      name: "DeviceSettingsView",
      components: {
           AppBar,
           ManufactorDataTable,
+          ModelTypeDataTable,
      },
      data() {
           return {};
