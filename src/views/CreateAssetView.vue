@@ -11,23 +11,9 @@
                          <v-autocomplete
                               id="EmployeeAutoCompleteField"
                               label="Employee"
-                              :items="EmployeeAutoCompleteFieldItems"
+                              :items="employeeAutoCompleteValues"
+                              v-model="EmployeeAutoCompleteFieldModel"
                          ></v-autocomplete>
-                    </v-col>
-               </v-row>
-               <v-row>
-                    <v-col>
-                         <v-autocomplete
-                              id="BuildingAutoCompleteField"
-                              label="Building"
-                              :items="BuildingAutoCompleteFieldItems"
-                         ></v-autocomplete>
-                    </v-col>
-                    <v-col>
-                         <v-text-field
-                              v-model="room"
-                              label="Room"
-                         ></v-text-field>
                     </v-col>
                </v-row>
                <v-row>
@@ -48,19 +34,30 @@
                                         <v-row>
                                              <v-col>
                                                   <v-autocomplete
-                                                       id="BuildingAutoCompleteField"
+                                                       id="ManufactorAutoCompleteField"
                                                        label="Manufactor"
                                                        :items="
-                                                            BuildingAutoCompleteFieldItems
+                                                            ManufactorAutoCompleteFieldItems
+                                                       "
+                                                       v-model="
+                                                            assets[index]
+                                                                 .Manufactor
+                                                       "
+                                                       @update:modelValue="
+                                                            initModels(index)
                                                        "
                                                   ></v-autocomplete>
                                              </v-col>
                                              <v-col>
                                                   <v-autocomplete
-                                                       id="BuildingAutoCompleteField"
+                                                       id="ModelsAutoCompleteField"
                                                        label="Model"
                                                        :items="
-                                                            BuildingAutoCompleteFieldItems
+                                                            assets[index]
+                                                                 .ModelArray
+                                                       "
+                                                       v-model="
+                                                            assets[index].Model
                                                        "
                                                   ></v-autocomplete>
                                              </v-col>
@@ -68,7 +65,10 @@
                                         <v-row>
                                              <v-col>
                                                   <v-text-field
-                                                       v-model="room"
+                                                       v-model="
+                                                            assets[index]
+                                                                 .InventoryNumber
+                                                       "
                                                        label="Inventorynumber"
                                                   ></v-text-field>
                                              </v-col>
@@ -78,7 +78,11 @@
                          </v-card>
                     </v-row>
                </div>
-               <v-btn color="primary"> Create asset </v-btn>
+               <div style="margin: 30px">
+                    <v-btn color="primary" @click="createAssets()">
+                         Create asset
+                    </v-btn>
+               </div>
           </v-container>
      </div>
 </template>
@@ -87,6 +91,41 @@
 import { defineComponent } from "vue";
 import AppBar from "../components/AppBar.vue";
 import fatch from "../methods/fatch.js";
+import {
+     getEmployees,
+     getManufactors,
+     getModeslByManufacor,
+} from "../methods/api";
+
+interface Employee {
+     BuildingName: string;
+     CreatedAt: Date;
+     EMail: string;
+     FirstName: string;
+     Fullname: string;
+     LastName: string;
+     UpdatetAt: Date;
+     id: number;
+}
+
+interface Manufactor {
+     id: number;
+     Name: string;
+}
+
+interface Model {
+     id: number;
+     Model: string;
+     ManufactorName: string;
+     AssetTypeName: string;
+}
+
+interface Asset {
+     Manufactor?: string;
+     Model?: string;
+     InventoryNumber?: number;
+     ModelArray?: Model[];
+}
 
 export default defineComponent({
      name: "CreateAssetView",
@@ -101,7 +140,11 @@ export default defineComponent({
                EmployeeAutoCompleteFieldItems: new Array<string>(),
                BuildingAutoCompleteFieldItems: new Array<string>(),
                room: new String(),
-               assets: new Array<object>(),
+               assets: [] as Asset[],
+               employeeAutoCompleteValues: [] as string[],
+               EmployeeAutoCompleteFieldModel: "" as string,
+               ManufactorAutoCompleteFieldItems: [] as string[],
+               ModelsAutoCompleteFieldItems: [] as string[],
           };
      },
      methods: {
@@ -109,13 +152,34 @@ export default defineComponent({
                this.assets.push({});
           },
           async initAutocompletes() {
-               console.log(await fatch("GetAllEmployees"));
+               // Emplyoees
+               let employees = await getEmployees();
+               employees.data.forEach((element: Employee) => {
+                    this.employeeAutoCompleteValues.push(element.Fullname);
+               });
+
+               // Manufactors
+               let manufactors = await getManufactors();
+               manufactors.data.forEach((element: Manufactor) => {
+                    this.ManufactorAutoCompleteFieldItems.push(element.Name);
+               });
           },
-          onSubmit() {
-               console.log("Hallo");
+          createAssets() {
+               console.log(this.assets);
           },
           required(v: string) {
                return !!v || "Field is required";
+          },
+          async initModels(index: number) {
+               console.log(this.assets[index].ModelArray);
+               let models = await getModeslByManufacor(
+                    this.assets[index].Manufactor
+               );
+               console.log(models);
+               models.data.forEach((element: Model) => {
+                    // Access properties or call methods on myObject safely
+                    this.assets[index]?.ModelArray?.push(element);
+               });
           },
      },
 });

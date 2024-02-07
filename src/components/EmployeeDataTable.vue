@@ -152,7 +152,7 @@
      />
 </template>
 
-<script lang="ts">
+<script>
 import fatch from "../methods/fatch.js";
 import {
      getEmployees,
@@ -165,7 +165,7 @@ export default {
      name: "EmployeeDataTable",
 
      data: () => ({
-          BuildingAutoCompleteFieldItems: new Array<string>(),
+          BuildingAutoCompleteFieldItems: [],
 
           // Main DataTable Variables
           EmployeeDataTableItems: [],

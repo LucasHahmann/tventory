@@ -169,3 +169,35 @@ export async function removeEmployee(employeeID) {
           .then((response) => response)
           .catch((err) => err);
 }
+
+export async function getManufactors() {
+     return fetch(`${backendURL}/manufactor`, {
+          method: "GET",
+          headers: {
+               "Content-Type": "application/json",
+          },
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then((response) => response)
+          .catch((err) => err);
+}
+
+export async function getModeslByManufacor(manufactor) {
+     return fetch(`${backendURL}/model/manufactor/${manufactor}`, {
+          method: "GET",
+          headers: {
+               "Content-Type": "application/json",
+          },
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then((response) => response)
+          .catch((err) => err);
+}

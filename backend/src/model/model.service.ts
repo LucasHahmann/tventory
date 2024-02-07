@@ -72,6 +72,35 @@ export class ModelService {
     }
   }
 
+  async getAllByManufactor(manufactor: string, res) {
+    try {
+      const model = await this.prisma.model.findMany({
+        where: { ManufactorName: manufactor },
+      });
+      if (model === null)
+        return res
+          .status(400)
+          .json({ message: 'No model was found!', data: model });
+      return res
+        .status(200)
+        .json({
+          message: 'Succesfully queried manufactor models!',
+          data: model,
+        });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        // Handle specific known request error
+        return res.status(400).json({ prismaCode: error.code });
+      } else if (error instanceof Prisma.PrismaClientUnknownRequestError) {
+        // Handle unknown request error
+        return res.status(500).json(error);
+      } else {
+        // Handle other errors
+        return res.status(500).json({ message: 'Unknwon Reason' });
+      }
+    }
+  }
+
   async findOne(id: number, res) {
     try {
       const model = await this.prisma.model.findUnique({

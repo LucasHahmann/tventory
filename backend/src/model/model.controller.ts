@@ -31,6 +31,14 @@ export class ModelController {
     return this.modelService.findOne(+id, res);
   }
 
+  @Get('/manufactor/:manufactor')
+  getAllByManufactor(
+    @Param('manufactor') manufactor: string,
+    @Res() res: Response,
+  ) {
+    return this.modelService.getAllByManufactor(manufactor, res);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,
