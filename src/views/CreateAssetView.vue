@@ -124,7 +124,7 @@ interface Asset {
      Manufactor?: string;
      Model?: string;
      InventoryNumber?: number;
-     ModelArray?: Model[];
+     ModelArray: string[];
 }
 
 export default defineComponent({
@@ -149,7 +149,7 @@ export default defineComponent({
      },
      methods: {
           addAsset() {
-               this.assets.push({});
+               this.assets.push({ ModelArray: [] });
           },
           async initAutocompletes() {
                // Emplyoees
@@ -165,20 +165,22 @@ export default defineComponent({
                });
           },
           createAssets() {
+               console.log(this.EmployeeAutoCompleteFieldModel);
                console.log(this.assets);
           },
           required(v: string) {
                return !!v || "Field is required";
           },
           async initModels(index: number) {
-               console.log(this.assets[index].ModelArray);
+               // First, delete array
+               this.assets[index].ModelArray = [];
+               // Get models from manufactor
                let models = await getModeslByManufacor(
                     this.assets[index].Manufactor
                );
-               console.log(models);
+               // Insert the Model Name in the array
                models.data.forEach((element: Model) => {
-                    // Access properties or call methods on myObject safely
-                    this.assets[index]?.ModelArray?.push(element);
+                    this.assets[index]?.ModelArray?.push(element.Model);
                });
           },
      },

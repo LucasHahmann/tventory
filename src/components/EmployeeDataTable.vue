@@ -236,7 +236,6 @@ export default {
           },
           // Add Employee Functions
           async sendNewEmployee() {
-               console.log(this.newEmployee);
                let createRequeste = await createEmployee(this.newEmployee);
                if (createRequeste.status == 201) {
                     this.EmployeeAlertType = "success";

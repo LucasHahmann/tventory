@@ -13,6 +13,7 @@ export class AssetService {
     try {
       const newAsset = await this.prisma.asset.create({
         data: {
+          InventoryNumber: createAssetDto.InventoryNumber,
           Employee: {
             connect: {
               id: createAssetDto.Employee,

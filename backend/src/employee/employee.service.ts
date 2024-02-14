@@ -23,7 +23,9 @@ export class EmployeeService {
           },
         },
       });
-      return res.status(200).json({ message: 'Succesfully created Employee' });
+      return res
+        .status(201)
+        .json({ status: 201, message: 'Succesfully created Employee' });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle specific known request error

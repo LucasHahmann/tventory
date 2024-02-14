@@ -8,4 +8,8 @@ export class CreateAssetDto {
   @IsString()
   @IsNotEmpty()
   ModelName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  InventoryNumber: string;
 }

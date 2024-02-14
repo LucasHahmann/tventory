@@ -19,6 +19,8 @@ model Asset {
   // Many Assets have one Model
   Model Model @relation(fields: [ModelName], references: [Model])
   ModelName String
+
+  InventoryNumber String @unique
 }
 
 model Model {
@@ -28,8 +30,8 @@ model Model {
   Manufactor Manufactor @relation(fields: [ManufactorName], references: [Name])
   ManufactorName String
   // N Types 1 Asset
-  AssetType AssetType @relation(fields: [AssetTypeName], references: [Type])
-  AssetTypeName String
+  AssetType AssetType @relation(fields: [AssetTypeName], references: [Type]) 
+  AssetTypeName String @unique
   // Asset
   Assets Asset[]
 }
@@ -38,7 +40,7 @@ model AssetType {
   id Int @id @default(autoincrement())
   Type String @unique
 
-  Models Model[]
+  Models Model?
 }
 
 model Manufactor {

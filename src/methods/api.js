@@ -201,3 +201,19 @@ export async function getModeslByManufacor(manufactor) {
           .then((response) => response)
           .catch((err) => err);
 }
+
+export async function getAllModels() {
+     return fetch(`${backendURL}/model`, {
+          method: "GET",
+          headers: {
+               "Content-Type": "application/json",
+          },
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then((response) => response)
+          .catch((err) => err);
+}
