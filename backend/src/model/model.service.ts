@@ -26,6 +26,7 @@ export class ModelService {
         },
       });
       return res.status(200).json({
+        status: 200,
         message: 'Successfully created model',
         data: newModel,
       });
@@ -81,12 +82,10 @@ export class ModelService {
         return res
           .status(400)
           .json({ message: 'No model was found!', data: model });
-      return res
-        .status(200)
-        .json({
-          message: 'Succesfully queried manufactor models!',
-          data: model,
-        });
+      return res.status(200).json({
+        message: 'Succesfully queried manufactor models!',
+        data: model,
+      });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle specific known request error

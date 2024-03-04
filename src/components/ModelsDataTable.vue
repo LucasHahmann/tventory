@@ -114,7 +114,7 @@
 
                          <v-autocomplete
                               id="AssetTypeAutoCompleteField"
-                              label="Manufactor"
+                              label="Type"
                               :items="AssetTypeAutoCompleteFieldItems"
                               v-model="newModel.AssetType"
                          ></v-autocomplete>
@@ -146,7 +146,12 @@
 
 <script>
 // import fatch from "../methods/fatch.js";
-import { getAllModels } from "../methods/api";
+import {
+     getAllModels,
+     getManufactors,
+     getAllModelTypes,
+     createModel,
+} from "../methods/api";
 export default {
      name: "ModelsDataTable",
 
@@ -158,6 +163,8 @@ export default {
           // New Models Overlay Variables
           ModelsCreateOverlay: false,
           newModel: {},
+          ManufactorAutoCompleteFieldItems: [],
+          AssetTypeAutoCompleteFieldItems: [],
 
           // Edit Models Overlay Variables
           ModelsEditOverlay: false,
@@ -176,9 +183,23 @@ export default {
 
      created() {
           this.initializeModelsDataTable();
+          this.getAutoCompleteItems();
      },
 
      methods: {
+          async getAutoCompleteItems() {
+               // Manufactors
+               let manufactor = await getManufactors();
+               manufactor.data.forEach((element) => {
+                    this.ManufactorAutoCompleteFieldItems.push(element.Name);
+               });
+
+               // Types
+               let types = await getAllModelTypes();
+               types.data.forEach((element) => {
+                    this.AssetTypeAutoCompleteFieldItems.push(element.Type);
+               });
+          },
           // Main Data Table Functions
           async initializeModelsDataTable() {
                let dataItems = await getAllModels();
@@ -201,7 +222,7 @@ export default {
           },
           // Add Models Functions
           async sendNewModel() {
-               let createRequeste = 1; // fatch("CreateModels", this.newModels);
+               let createRequeste = await createModel(this.newModel); // fatch("CreateModels", this.newModels);
                if (createRequeste.status == 200) {
                     this.ModelsAlertType = "success";
                     this.ModelsAlertText = createRequeste.message;
@@ -223,7 +244,7 @@ export default {
                this.ModelsEditOverlay = true;
           },
           async sendEditModels() {
-               let editRequest = 1; /* await fatch("EditModels", 
+               let editRequest = 1; /* await fatch("EditModels",
                {
                     id: this.editableModels.id,
                     Name: this.editableModels.Name,

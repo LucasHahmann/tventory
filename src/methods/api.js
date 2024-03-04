@@ -1,5 +1,47 @@
 let backendURL = "http://localhost:3000";
 
+export async function createAsset(newAsset) {
+     return fetch(`${backendURL}/asset`, {
+          method: "POST",
+          headers: {
+               "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+               Employee: newAsset.ID,
+               ModelName: newAsset.ModelName,
+               InventoryNumber: newAsset.InventoryNumber,
+          }),
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then((response) => response)
+          .catch((err) => err);
+}
+
+export async function createModel(newModel) {
+     return fetch(`${backendURL}/model`, {
+          method: "POST",
+          headers: {
+               "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+               Model: newModel.Name,
+               Manufactor: newModel.Manufactor,
+               AssetType: newModel.AssetType,
+          }),
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then((response) => response)
+          .catch((err) => err);
+}
+
 export async function getAllModelTypes() {
      return fetch(`${backendURL}/asset-type`, {
           method: "GET",

@@ -95,6 +95,7 @@ import {
      getEmployees,
      getManufactors,
      getModeslByManufacor,
+     createAsset,
 } from "../methods/api";
 
 interface Employee {
@@ -145,6 +146,7 @@ export default defineComponent({
                EmployeeAutoCompleteFieldModel: "" as string,
                ManufactorAutoCompleteFieldItems: [] as string[],
                ModelsAutoCompleteFieldItems: [] as string[],
+               AllEmployees: [] as Employee[],
           };
      },
      methods: {
@@ -154,7 +156,8 @@ export default defineComponent({
           async initAutocompletes() {
                // Emplyoees
                let employees = await getEmployees();
-               employees.data.forEach((element: Employee) => {
+               this.AllEmployees = employees.data;
+               this.AllEmployees.forEach((element: Employee) => {
                     this.employeeAutoCompleteValues.push(element.Fullname);
                });
 
@@ -164,9 +167,22 @@ export default defineComponent({
                     this.ManufactorAutoCompleteFieldItems.push(element.Name);
                });
           },
-          createAssets() {
-               console.log(this.EmployeeAutoCompleteFieldModel);
-               console.log(this.assets);
+          async createAssets() {
+               let selectedEmployee =
+                    this.AllEmployees[
+                         this.employeeAutoCompleteValues.indexOf(
+                              this.EmployeeAutoCompleteFieldModel
+                         )
+                    ];
+               this.assets.forEach(async (element) => {
+                    console.log(
+                         await createAsset({
+                              ID: selectedEmployee.id,
+                              ModelName: element.Model,
+                              InventoryNumber: element.InventoryNumber,
+                         })
+                    );
+               });
           },
           required(v: string) {
                return !!v || "Field is required";

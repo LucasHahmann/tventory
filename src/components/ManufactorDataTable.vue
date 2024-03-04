@@ -178,7 +178,6 @@ export default {
           // Main Data Table Functions
           async initializeManufactorDataTable() {
                let dataItems = await fatch("GetAllManufactors");
-               console.log(dataItems);
                if (dataItems.data.length == 0) return;
                this.ManufactorDataTableHeaders = [
                     {

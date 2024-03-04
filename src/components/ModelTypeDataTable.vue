@@ -144,7 +144,11 @@
 <script>
 /* eslint-disable */
 import fatch from "../methods/fatch.js";
-import { getAllModelTypes, createModelType } from "../methods/api.js";
+import {
+     getAllModelTypes,
+     createModelType,
+     createModel,
+} from "../methods/api.js";
 export default {
      name: "ModelTypeDataTable",
 
@@ -193,8 +197,9 @@ export default {
           },
           // Add ModelType Functions
           async sendNewModelType() {
-               createModelType(this.newModelType.Name);
-               return;
+               let createRequeste = await createModelType(
+                    this.newModelType.Name
+               );
                if (createRequeste.status == 200) {
                     this.ModelTypeAlertType = "success";
                     this.ModelTypeAlertText = createRequeste.message;

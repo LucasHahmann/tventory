@@ -16,6 +16,7 @@ export class AssetTypeService {
         },
       });
       return res.status(200).json({
+        status: 200,
         message: 'Successfully created Type',
         data: newType,
       });
