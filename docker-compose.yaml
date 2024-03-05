@@ -1,0 +1,35 @@
+version: "3"
+services:
+     backend:
+          image: node:14
+          working_dir: /app
+          volumes:
+               - .:/app
+          command: sh -c "cd backend && npm install && npm run start:dev"
+          ports:
+               - "3000:3000"
+          depends_on:
+               - database
+
+     frontend:
+          image: node:14
+          working_dir: /app
+          volumes:
+               - .:/app
+          command: sh -c "cd frontend && npm install && npm run serve"
+          ports:
+               - "8080:8080"
+
+     database:
+          image: postgres:latest
+          environment:
+               POSTGRES_DB: nest_vue_app
+               POSTGRES_USER: nest_vue_user
+               POSTGRES_PASSWORD: nest_vue_password
+          volumes:
+               - pgdata:/var/lib/postgresql/data
+          ports:
+               - "5432:5432"
+
+volumes:
+     pgdata:
