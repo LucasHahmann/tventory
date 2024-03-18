@@ -1,5 +1,23 @@
 let backendURL = "http://localhost:3000";
 
+export async function CheckBackendConnection() {
+     let request = await fetch(`${backendURL}/`, {
+          method: "GET",
+          headers: {
+               "Content-Type": "application/json",
+          },
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then((response) => response)
+          .catch((err) => err);
+     if (request.status != "OK") return false;
+     return true;
+}
+
 export async function createAsset(newAsset) {
      return fetch(`${backendURL}/asset`, {
           method: "POST",
@@ -257,5 +275,23 @@ export async function getAllModels() {
                return response.json();
           })
           .then((response) => response)
+          .catch((err) => err);
+}
+
+export async function getAllAssets() {
+     return fetch(`${backendURL}/asset`, {
+          method: "GET",
+          headers: {
+               "Content-Type": "application/json",
+          },
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then(function (response) {
+               return response.data;
+          })
           .catch((err) => err);
 }

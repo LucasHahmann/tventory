@@ -9,6 +9,7 @@ import { ModelModule } from './model/model.module';
 import { AssetTypeModule } from './asset-type/asset-type.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { DatabaseService } from './database.service';
 
 @Module({
   imports: [
@@ -24,6 +25,6 @@ import { AppService } from './app.service';
     AssetTypeModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DatabaseService],
 })
 export class AppModule {}

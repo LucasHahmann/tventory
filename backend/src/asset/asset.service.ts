@@ -54,7 +54,13 @@ export class AssetService {
 
   async findAll(res) {
     try {
-      const assets = await this.prisma.asset.findMany();
+      const assets = await this.prisma.asset.findMany({
+        //relationLoadStrategy: 'join',
+        include: {
+          Employee: true,
+          Model: true,
+        },
+      });
 
       return res
         .status(200)

@@ -10,6 +10,11 @@ datasource db {
   url      = env("POSTGRES_STRING")
 }
 
+model Configuration {
+  id Int @id @default(autoincrement())
+  InventoryNumberprefix String
+}
+
 model Asset {
   id Int @id @default(autoincrement())
   // 1 Employee N Assets
