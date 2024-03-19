@@ -7,9 +7,10 @@ export class ConfigurationService {
   constructor(private prisma: PrismaService) {}
 
   async createInventoryPrefix() {
-    await this.prisma.configuration.create({
+    let currentYear = await this.prisma.configuration.create({
       data: {
         KeyName: 'InventoryPrefix',
+        KeyValue: String(new Date().getFullYear()),
       },
     });
   }

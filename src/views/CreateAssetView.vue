@@ -96,6 +96,7 @@ import {
      getManufactors,
      getModeslByManufacor,
      createAsset,
+     getInventoryPrefix,
 } from "../methods/api";
 
 interface Employee {
@@ -124,7 +125,7 @@ interface Model {
 interface Asset {
      Manufactor?: string;
      Model?: string;
-     InventoryNumber?: number;
+     InventoryNumber?: string;
      ModelArray: string[];
 }
 
@@ -150,8 +151,11 @@ export default defineComponent({
           };
      },
      methods: {
-          addAsset() {
-               this.assets.push({ ModelArray: [] });
+          async addAsset() {
+               this.assets.push({
+                    ModelArray: [],
+                    InventoryNumber: (await getInventoryPrefix()) + "-",
+               });
           },
           async initAutocompletes() {
                // Emplyoees
@@ -198,6 +202,7 @@ export default defineComponent({
                models.data.forEach((element: Model) => {
                     this.assets[index]?.ModelArray?.push(element.Model);
                });
+               this.assets[index].InventoryNumber = await getInventoryPrefix();
           },
      },
 });
