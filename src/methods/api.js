@@ -1,5 +1,39 @@
 let backendURL = "http://localhost:3000";
 
+export async function setInventoryPrefix(prefix) {
+     return fetch(`${backendURL}/configuration/inventoryprefix`, {
+          method: "PATCH",
+          headers: {
+               "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ InventoryPrefix: prefix }),
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then((response) => response)
+          .catch((err) => err);
+}
+
+export async function getInventoryPrefix() {
+     let request = await fetch(`${backendURL}/configuration/inventoryprefix`, {
+          method: "GET",
+          headers: {
+               "Content-Type": "application/json",
+          },
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then((response) => response)
+          .catch((err) => err);
+     return request.data.KeyValue;
+}
+
 export async function CheckBackendConnection() {
      let request = await fetch(`${backendURL}/`, {
           method: "GET",
