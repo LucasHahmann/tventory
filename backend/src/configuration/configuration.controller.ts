@@ -8,11 +8,27 @@ import {
   Delete,
   Res,
 } from '@nestjs/common';
-import { ConfigurationController } from './controller.service';
+import { ConfigurationService } from './configuration.service';
+import { UpdateInventoryPrefix } from './dto/update-inventoryprefix.dto';
 
-@Controller('employee')
+@Controller('configuration')
 export class ConfigurationController {
-  constructor(
-    private readonly configurationController: ConfigurationController,
-  ) {}
+  constructor(private readonly configurationService: ConfigurationService) {}
+
+  @Get('inventoryprefix')
+  getInventoryPrefix(configurationService, @Res() res: Response) {
+    return this.configurationService.getInventoryPrefix(res);
+  }
+
+  @Patch('inventoryprefix')
+  setInventoryPrefix(
+    @Body()
+    UpdateInventoryPrefix: UpdateInventoryPrefix,
+    @Res() res: Response,
+  ) {
+    return this.configurationService.setInventoryPrefix(
+      UpdateInventoryPrefix,
+      res,
+    );
+  }
 }

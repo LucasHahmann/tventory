@@ -10,6 +10,7 @@ import { AssetTypeModule } from './asset-type/asset-type.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseService } from './database.service';
+import { ConfigurationModule } from './configuration/configuration.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { DatabaseService } from './database.service';
     ManufactorModule,
     ModelModule,
     AssetTypeModule,
+    ConfigurationModule,
   ],
   controllers: [AppController],
   providers: [AppService, DatabaseService],

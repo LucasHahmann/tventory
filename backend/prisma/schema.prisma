@@ -12,7 +12,8 @@ datasource db {
 
 model Configuration {
   id Int @id @default(autoincrement())
-  InventoryNumberprefix String
+  KeyName String @unique 
+  KeyValue String?
 }
 
 model Asset {
