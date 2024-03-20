@@ -12,6 +12,7 @@
           "@popperjs/core": "^2.11.8",
           "core-js": "^3.8.3",
           "roboto-fontface": "*",
+          "volar-service-vetur": "^0.0.34",
           "vue": "^3.2.13",
           "vue-class-component": "^8.0.0-0",
           "vue-router": "^4.0.3",

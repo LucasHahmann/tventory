@@ -1,18 +1,18 @@
 <template>
      <div>
-          <AppBar />
+          <app-bar />
      </div>
 
-     <div style="margin: 75px">
+     <div class="content">
           <h1>Create Asset</h1>
           <v-container>
                <v-row>
                     <v-col>
                          <v-autocomplete
-                              id="EmployeeAutoCompleteField"
-                              label="Employee"
-                              :items="employeeAutoCompleteValues"
                               v-model="EmployeeAutoCompleteFieldModel"
+                              :items="employeeAutoCompleteValues"
+                              label="Employee"
+                              id="EmployeeAutoCompleteField"
                          ></v-autocomplete>
                     </v-col>
                </v-row>
@@ -34,15 +34,14 @@
                                         <v-row>
                                              <v-col>
                                                   <v-autocomplete
-                                                       id="ManufactorAutoCompleteField"
-                                                       label="Manufactor"
+                                                       v-model="
+                                                            asset.Manufactor
+                                                       "
                                                        :items="
                                                             ManufactorAutoCompleteFieldItems
                                                        "
-                                                       v-model="
-                                                            assets[index]
-                                                                 .Manufactor
-                                                       "
+                                                       label="Manufactor"
+                                                       id="ManufactorAutoCompleteField"
                                                        @update:modelValue="
                                                             initModels(index)
                                                        "
@@ -50,15 +49,10 @@
                                              </v-col>
                                              <v-col>
                                                   <v-autocomplete
-                                                       id="ModelsAutoCompleteField"
+                                                       v-model="asset.Model"
+                                                       :items="asset.ModelArray"
                                                        label="Model"
-                                                       :items="
-                                                            assets[index]
-                                                                 .ModelArray
-                                                       "
-                                                       v-model="
-                                                            assets[index].Model
-                                                       "
+                                                       id="ModelsAutoCompleteField"
                                                   ></v-autocomplete>
                                              </v-col>
                                         </v-row>
@@ -66,8 +60,7 @@
                                              <v-col>
                                                   <v-text-field
                                                        v-model="
-                                                            assets[index]
-                                                                 .InventoryNumber
+                                                            asset.InventoryNumber
                                                        "
                                                        label="Inventorynumber"
                                                   ></v-text-field>
@@ -90,7 +83,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import AppBar from "../components/AppBar.vue";
-import fatch from "../methods/fatch.js";
 import {
      getEmployees,
      getManufactors,
@@ -106,7 +98,7 @@ interface Employee {
      FirstName: string;
      Fullname: string;
      LastName: string;
-     UpdatetAt: Date;
+     UpdatedAt: Date;
      id: number;
 }
 
@@ -139,14 +131,11 @@ export default defineComponent({
      },
      data() {
           return {
-               EmployeeAutoCompleteFieldItems: new Array<string>(),
-               BuildingAutoCompleteFieldItems: new Array<string>(),
-               room: new String(),
+               EmployeeAutoCompleteFieldItems: [] as string[],
                assets: [] as Asset[],
                employeeAutoCompleteValues: [] as string[],
                EmployeeAutoCompleteFieldModel: "" as string,
                ManufactorAutoCompleteFieldItems: [] as string[],
-               ModelsAutoCompleteFieldItems: [] as string[],
                AllEmployees: [] as Employee[],
           };
      },
@@ -158,16 +147,16 @@ export default defineComponent({
                });
           },
           async initAutocompletes() {
-               // Emplyoees
+               // Employees
                let employees = await getEmployees();
                this.AllEmployees = employees.data;
                this.AllEmployees.forEach((element: Employee) => {
                     this.employeeAutoCompleteValues.push(element.Fullname);
                });
 
-               // Manufactors
-               let manufactors = await getManufactors();
-               manufactors.data.forEach((element: Manufactor) => {
+               // Manufacturers
+               let manufacturers = await getManufactors();
+               manufacturers.data.forEach((element: Manufactor) => {
                     this.ManufactorAutoCompleteFieldItems.push(element.Name);
                });
           },
@@ -178,23 +167,20 @@ export default defineComponent({
                               this.EmployeeAutoCompleteFieldModel
                          )
                     ];
-               this.assets.forEach(async (element) => {
+               this.assets.forEach(async (asset) => {
                     console.log(
                          await createAsset({
                               ID: selectedEmployee.id,
-                              ModelName: element.Model,
-                              InventoryNumber: element.InventoryNumber,
+                              ModelName: asset.Model,
+                              InventoryNumber: asset.InventoryNumber,
                          })
                     );
                });
           },
-          required(v: string) {
-               return !!v || "Field is required";
-          },
           async initModels(index: number) {
                // First, delete array
                this.assets[index].ModelArray = [];
-               // Get models from manufactor
+               // Get models from manufacturer
                let models = await getModeslByManufacor(
                     this.assets[index].Manufactor
                );

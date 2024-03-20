@@ -31,6 +31,14 @@ export class AssetController {
     return this.assetService.findOne(+id, res);
   }
 
+  @Get(':InventoryNumber')
+  findByInventoryNumber(
+    @Param('InventoryNumber') InventoryNumber: string,
+    @Res() res: Response,
+  ) {
+    return this.assetService.findByInventoryNumber(InventoryNumber, res);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,
