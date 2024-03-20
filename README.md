@@ -5,7 +5,6 @@ Tventory is a streamlined Asset Management System designed for efficient managem
 ## Features (in Development)
 
 -    **Device Inventory:** Effortlessly manage and track IT devices within your organization's ecosystem.
--    **Authentication:** Secure user access through robust authentication mechanisms.
 -    **Comprehensive Device Data:** Store detailed information about each device, including specifications, status, and location.
 -    **Search and Filtering:** Easily locate devices using search and filter functionalities.
 -    **Reporting:** Generate insightful reports on device status, usage patterns, and more for informed decision-making.
@@ -20,27 +19,27 @@ Tventory is a streamlined Asset Management System designed for efficient managem
 
 ### Models
 
--    [ ] Create Model
--    [ ] Edit Model
--    [ ] Remove Model
+-    [x] Create Model
+-    [x] Edit Model
+-    [x] Remove Model
 
 ### Types
 
--    [ ] Create Type
--    [ ] Edit Type
--    [ ] Remove Type
+-    [x] Create Type
+-    [x] Edit Type
+-    [x] Remove Type
 
 ### Employees
 
--    [ ] Create Employee
--    [ ] Edit Employee
--    [ ] Remove Employee
+-    [x] Create Employee
+-    [x] Edit Employee
+-    [x] Remove Employee
 
 ### Buildings
 
--    [ ] Create Building
--    [ ] Edit Building
--    [ ] Remove Building
+-    [x] Create Building
+-    [x] Edit Building
+-    [x] Remove Building
 
 ## Installation
 

@@ -9,7 +9,6 @@ export class AssetService {
   constructor(private prisma: PrismaService) {}
 
   async create(createAssetDto: CreateAssetDto, res) {
-    console.log(createAssetDto);
     try {
       const newAsset = await this.prisma.asset.create({
         data: {

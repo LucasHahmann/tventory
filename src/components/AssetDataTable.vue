@@ -17,8 +17,14 @@
                          :loading="loading"
                          :search="AssetDataTableSearching"
                          @update:options="loadItems"
-                    ></v-data-table
-               ></v-card-text>
+                    >
+                         <template v-slot:[`item.link`]="{ item }">
+                              <v-btn icon :href="item.link" target="_blank">
+                                   <v-icon>mdi-desktop-classic</v-icon>
+                              </v-btn>
+                         </template>
+                    </v-data-table></v-card-text
+               >
           </v-card>
      </div>
 </template>
@@ -33,12 +39,16 @@ interface Asset {
      EmployeeID: number;
      ModelName: string;
      InventoryNumber: string;
+     link?: string;
 }
 
 export default defineComponent({
      name: "MetaSettingsView",
      components: {},
      methods: {
+          generateLink(Asset: Asset) {
+               return `http://localhost:8080/asset/${Asset.InventoryNumber}`;
+          },
           async loadItems() {
                this.loading = true;
                this.AssetDataTableHeaders = [
@@ -66,10 +76,13 @@ export default defineComponent({
                     },
                     {
                          title: "Link",
-                         key: "Model.ManufactorName",
+                         key: "link",
                     },
                ];
                this.AssetsArray = await getAllAssets();
+               this.AssetsArray.forEach((element) => {
+                    element.link = this.generateLink(element);
+               });
                this.loading = false;
           },
      },
