@@ -26,12 +26,12 @@ export class AssetController {
     return this.assetService.findAll(res);
   }
 
-  @Get(':id')
+  @Get('id/:id')
   findOne(@Param('id') id: string, @Res() res: Response) {
     return this.assetService.findOne(+id, res);
   }
 
-  @Get(':InventoryNumber')
+  @Get('InventoryNumber/:InventoryNumber')
   findByInventoryNumber(
     @Param('InventoryNumber') InventoryNumber: string,
     @Res() res: Response,

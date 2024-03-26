@@ -79,10 +79,13 @@ export class AssetService {
   }
 
   async findByInventoryNumber(InventoryNumber: string, res) {
-    console.log(InventoryNumber);
     try {
       const asset = await this.prisma.asset.findUnique({
         where: { InventoryNumber: InventoryNumber },
+        include: {
+          Employee: true,
+          Model: true,
+        },
       });
       if (asset === null)
         return res

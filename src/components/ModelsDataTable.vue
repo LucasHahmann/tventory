@@ -203,7 +203,6 @@ export default {
           // Main Data Table Functions
           async initializeModelsDataTable() {
                let dataItems = await getAllModels();
-               console.log(dataItems);
                if (dataItems.data.length == 0) return;
                this.ModelsDataTableHeaders = [
                     {
@@ -250,7 +249,6 @@ export default {
                     Name: this.editableModels.Name,
                });
                */
-               console.log(editRequest);
                if (editRequest.status == 200) {
                     this.ModelsAlertType = "success";
                     this.ModelsAlertText = editRequest.message;

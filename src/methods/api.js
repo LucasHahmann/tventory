@@ -312,6 +312,24 @@ export async function getAllModels() {
           .catch((err) => err);
 }
 
+export async function getAssetByInventoryNumber(InventoryNumber) {
+     return fetch(`${backendURL}/asset/InventoryNumber/${InventoryNumber}`, {
+          method: "GET",
+          headers: {
+               "Content-Type": "application/json",
+          },
+     })
+          .then(async function (response) {
+               if (!response.ok)
+                    new Error("HTTP status " + response.status + response);
+               return response.json();
+          })
+          .then(function (response) {
+               return response.data;
+          })
+          .catch((err) => err);
+}
+
 export async function getAllAssets() {
      return fetch(`${backendURL}/asset`, {
           method: "GET",

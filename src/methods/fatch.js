@@ -27,7 +27,6 @@ export default async function fatch(endpoint, variables) {
                url = backend + `/manufactor/${variables.id}`;
                fetchMethod = "PATCH";
                b0dy = JSON.stringify({ Name: variables.Name });
-               console.log(url, b0dy);
                break;
           case "CheckBackendConnection":
                url = backend + `/`;

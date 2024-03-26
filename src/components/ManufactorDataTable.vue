@@ -220,7 +220,6 @@ export default {
                     id: this.editableManufactor.id,
                     Name: this.editableManufactor.Name,
                });
-               console.log(editRequest);
                if (editRequest.status == 200) {
                     this.ManufactorAlertType = "success";
                     this.ManufactorAlertText = editRequest.message;

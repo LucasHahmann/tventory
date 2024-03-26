@@ -225,7 +225,6 @@ export default {
                     id: this.editableModelType.id,
                     Name: this.editableModelType.Name,
                });
-               console.log(editRequest);
                if (editRequest.status == 200) {
                     this.ModelTypeAlertType = "success";
                     this.ModelTypeAlertText = editRequest.message;

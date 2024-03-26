@@ -38,7 +38,7 @@ export default defineComponent({
                this.InventoryPrefix = await getInventoryPrefix();
           },
           async toggleMarker() {
-               console.log(await setInventoryPrefix(this.InventoryPrefix));
+               await setInventoryPrefix(this.InventoryPrefix);
           },
      },
 

@@ -42,6 +42,7 @@
                                                        "
                                                        label="Manufactor"
                                                        id="ManufactorAutoCompleteField"
+                                                       no-data-text="No manufactors avaiable"
                                                        @update:modelValue="
                                                             initModels(index)
                                                        "
@@ -53,6 +54,7 @@
                                                        :items="asset.ModelArray"
                                                        label="Model"
                                                        id="ModelsAutoCompleteField"
+                                                       no-data-text="Please Select a manufactor first"
                                                   ></v-autocomplete>
                                              </v-col>
                                         </v-row>
@@ -70,11 +72,6 @@
                               </v-card-text>
                          </v-card>
                     </v-row>
-               </div>
-               <div style="margin: 30px">
-                    <v-btn color="primary" @click="createAssets()">
-                         Create asset
-                    </v-btn>
                </div>
           </v-container>
      </div>
@@ -168,13 +165,11 @@ export default defineComponent({
                          )
                     ];
                this.assets.forEach(async (asset) => {
-                    console.log(
-                         await createAsset({
-                              ID: selectedEmployee.id,
-                              ModelName: asset.Model,
-                              InventoryNumber: asset.InventoryNumber,
-                         })
-                    );
+                    await createAsset({
+                         ID: selectedEmployee.id,
+                         ModelName: asset.Model,
+                         InventoryNumber: asset.InventoryNumber,
+                    });
                });
           },
           async initModels(index: number) {
