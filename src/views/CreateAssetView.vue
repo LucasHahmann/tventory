@@ -73,6 +73,12 @@
                          </v-card>
                     </v-row>
                </div>
+
+               <div style="margin: 30px">
+                    <v-btn color="primary" @click="createAssets()">
+                         Create asset
+                    </v-btn>
+               </div>
           </v-container>
      </div>
 </template>
@@ -171,6 +177,7 @@ export default defineComponent({
                          InventoryNumber: asset.InventoryNumber,
                     });
                });
+               this.assets = [];
           },
           async initModels(index: number) {
                // First, delete array

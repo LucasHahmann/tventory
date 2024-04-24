@@ -1,7 +1,14 @@
 <template>
      <div>
           <v-app-bar app>
-               <v-app-bar-title>Tventory</v-app-bar-title>
+               <v-app-bar-title
+                    ><v-img
+                         height="70"
+                         width="70"
+                         src="../assets/tventory-pixelart-01.png"
+                    ></v-img
+               ></v-app-bar-title>
+
                <v-btn @click="route('')"> Dashboard </v-btn>
                <v-btn @click="route('create')"> Create Device </v-btn>
                <v-btn @click="route('devicesettings')"> Device Settings</v-btn>

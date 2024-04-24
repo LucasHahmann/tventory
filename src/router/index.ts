@@ -4,6 +4,7 @@ import CreateAssetView from "../views/CreateAssetView.vue";
 import DeviceSettingsView from "../views/DeviceSettingsView.vue";
 import MetaSettingsView from "../views/MetaSettingsView.vue";
 import AssetView from "../views/AssetView.vue";
+import TestView from "../views/TestTable.vue";
 
 const routes: Array<RouteRecordRaw> = [
      {
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
           path: "/asset/:InventoryNumber",
           name: "AssetView",
           component: AssetView,
+     },
+     {
+          path: "/test",
+          name: "test",
+          component: TestView,
      },
 ];
 
