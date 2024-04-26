@@ -67,10 +67,6 @@ export default defineComponent({
                          key: "Employee.Fullname",
                     },
                     {
-                         title: "Model",
-                         key: "Model.Model",
-                    },
-                    {
                          title: "Manufactor",
                          key: "Model.ManufactorName",
                     },

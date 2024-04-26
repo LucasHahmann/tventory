@@ -20,6 +20,7 @@
                                                        v-model="
                                                             currentEmplyoee.FirstName
                                                        "
+                                                       disabled
                                                   ></v-text-field>
                                              </v-col>
                                         </v-row>
@@ -33,6 +34,7 @@
                                                        v-model="
                                                             currentEmplyoee.LastName
                                                        "
+                                                       disabled
                                                   ></v-text-field>
                                              </v-col>
                                         </v-row>
@@ -46,6 +48,7 @@
                                                        v-model="
                                                             currentEmplyoee.EMail
                                                        "
+                                                       disabled
                                                   ></v-text-field>
                                              </v-col>
                                         </v-row>
@@ -62,6 +65,7 @@
                                                        v-model="
                                                             currentEmplyoee.BuildingName
                                                        "
+                                                       disabled
                                                   ></v-autocomplete>
                                              </v-col>
                                         </v-row>
@@ -93,6 +97,7 @@
                                                        v-model="
                                                             Asset.InventoryNumber
                                                        "
+                                                       disabled
                                                   ></v-text-field>
                                              </v-col>
                                         </v-row>
@@ -104,6 +109,7 @@
                                                        filled
                                                        outlined
                                                        v-model="Asset.ModelName"
+                                                       disabled
                                                   ></v-text-field>
                                              </v-col>
                                         </v-row>
@@ -119,6 +125,7 @@
                                                        v-model="
                                                             currentEmplyoee.BuildingName
                                                        "
+                                                       disabled
                                                   ></v-autocomplete>
                                              </v-col>
                                         </v-row>
@@ -133,6 +140,7 @@
                                                        v-model="
                                                             currentModel.AssetTypeName
                                                        "
+                                                       disabled
                                                   ></v-text-field>
                                              </v-col>
                                         </v-row>
